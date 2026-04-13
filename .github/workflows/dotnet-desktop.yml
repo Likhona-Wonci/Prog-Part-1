@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Name: CyberGuardAssistant.sln   # ✅ FIXED (put your real .sln file)
+      Solution_Name: CyberGuardAssistant.sln
       Configuration: ${{ matrix.configuration }}
 
     steps:
@@ -31,23 +31,23 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
-    # ✅ Restore dependencies
+    # ✅ FIX: Use proper Windows env variable syntax
     - name: Restore
-      run: dotnet restore $env:Solution_Name
+      run: dotnet restore %Solution_Name%
 
-    # ✅ Build solution
+    # ✅ FIX
     - name: Build
-      run: dotnet build $env:Solution_Name --configuration $env:Configuration --no-restore
+      run: dotnet build %Solution_Name% --configuration %Configuration% --no-restore
 
-    # ✅ Run tests (WON’T FAIL if you don’t have tests)
+    # ✅ FIX
     - name: Run tests (optional)
-      run: dotnet test $env:Solution_Name --no-build --verbosity normal
+      run: dotnet test %Solution_Name% --no-build --verbosity normal
       continue-on-error: true
 
-    # ✅ Upload build output instead of MSIX (since most projects don’t have WAP)
+    # ✅ FIX: Path syntax corrected
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: Build Output
         path: |
-          **/bin/${{ matrix.configuration }}/**
+          **\bin\${{ matrix.configuration }}\**
