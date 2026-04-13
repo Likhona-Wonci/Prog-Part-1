@@ -17,3 +17,4 @@ Continuously accepts user input
 Validates input using InputValidator
 Processes input using ResponseHandler
 Displays responses in the console
+<img width="1736" height="842" alt="image" src="https://github.com/user-attachments/assets/52758553-55d7-46db-a991-73f4c1298c30" />
